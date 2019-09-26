@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { DragulaService } from 'ng2-dragula';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -6,12 +8,20 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  private sub: Subscription;
 
   title = 'AnguralDragColumnInScrollableTable';
   columns: string[];
 
-  constructor() {
+  constructor(dragulaService: DragulaService) {
     this.columns = this.loadColumns();
+
+    this.sub = dragulaService.dropModel()
+      .subscribe(({ name, item, targetIndex, sourceIndex }) => {
+        if (name === 'table_columns') {
+          this.orderColumn({ column: item, oldPosition: sourceIndex, newPosition: targetIndex});
+        }
+      });
   }
 
   private loadColumns(): string[] {
@@ -21,6 +31,11 @@ export class AppComponent {
     }
 
     return result;
+  }
+
+  private orderColumn(data: { column: any, oldPosition: number, newPosition: number }) {
+    this.columns.splice(data.oldPosition, 1);
+    this.columns.splice(data.newPosition, 0, data.column as any);
   }
 
 }
