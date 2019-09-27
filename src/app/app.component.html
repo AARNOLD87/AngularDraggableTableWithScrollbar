@@ -8,7 +8,7 @@
   <div class="table-responsive table-container" appAutoScroll>
     <table class="table">
       <thead class="thead-dark">
-        <tr dragula="table_columns" [dragulaModel]="columns">
+        <tr dragula="table_columns" [(dragulaModel)]="columns">
           <th *ngFor="let column of columns">
             {{column}}
           </th>

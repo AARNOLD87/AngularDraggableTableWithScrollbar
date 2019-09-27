@@ -18,10 +18,10 @@ export class AppComponent {
   constructor(dragulaService: DragulaService, private elemRef: ElementRef) {
     this.fillTable();
 
-    this.sub = dragulaService.dropModel()
-      .subscribe(({ item, targetIndex, sourceIndex }) => {
-        this.orderColumn({ column: item, oldPosition: sourceIndex, newPosition: targetIndex});
-      });
+    // this.sub = dragulaService.dropModel()
+    //   .subscribe(({ item, targetIndex, sourceIndex }) => {
+    //     this.orderColumn({ column: item, oldPosition: sourceIndex, newPosition: targetIndex});
+    //   });
   }
 
   private fillTable() {
