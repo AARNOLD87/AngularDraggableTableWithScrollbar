@@ -5,15 +5,22 @@
 </div>
 
 <div class="p-5 m-5">
-  <div class="table-responsive table-container">
+  <div class="table-responsive table-container" appAutoScroll>
     <table class="table">
       <thead class="thead-dark">
-        <tr dragula="table_columns">
+        <tr dragula="table_columns" [dragulaModel]="columns">
           <th *ngFor="let column of columns">
             {{column}}
           </th>
         </tr>
       </thead>
+      <tbody>
+        <tr *ngFor="let row of rows">
+          <td *ngFor="let column of columns">
+            {{row[column]}}
+          </td>
+        </tr>
+      </tbody>
     </table>
   </div>
 </div>
